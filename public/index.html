@@ -1,0 +1,90 @@
+<!doctype html>
+
+
+<html ng-app="flitterMap">
+    <head>
+        <!-- META -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+
+        <title>Node/Angular Todo App</title>
+
+        <!-- SCROLLS -->
+        <style>
+           #map{
+                background: url('Flitter-NumberedLabel.jpg');
+                background-size: contain;
+                background-repeat: no-repeat;
+                width: 1200px;
+                height: 780px;
+                float: left;
+            }
+            #controls{
+                margin-top: 20px;
+                width: 200px;
+                margin-left: 20px;
+                float:left;
+                font-family: Lato;
+            }
+            input{
+                height: 29px;
+                font-size: 16px;
+                width: 100px;
+                text-indent: 10px;
+                border-radius: 2px;
+                border: 1px solid #ccc;
+            }
+            button{
+                border-radius: 0;
+                border: 0;
+                height: 30px;
+                background-color: #3c3;
+                font-weight: bold;
+                color: white;
+                font-size: 14px;
+            }
+            .draggable {
+                width:50px;
+                height: 50px;
+                background: transparent;
+                color:white;
+                border: none;
+            }
+            .draggable>img {
+                width:50px;
+            }
+        </style>
+
+        <!-- SPELLS -->
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><!-- load jquery -->
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.8/angular.min.js"></script><!-- load angular -->
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+
+        <script src="core.js"></script>
+
+        <title>Turn 1</title>
+    </head>
+
+    <body ng-controller="mainController">
+        <div id="map">
+            <div my-draggable mongoId="{{ship._id}}" ng-repeat="ship in ships" class="draggable" xPos="{{ship.xPos}}" style="top:{{ship.yPos}}px; left:{{ship.xPos}}px; position: absolute">
+                <img src="{{ship.icon}}"/>
+            </div>
+        </div>
+
+        <form id='controls'>
+            <div id="trashZone" style="background: #ccc; height: 20px; margin-bottom: 20px">
+                Trash Zone
+            </div>
+
+            <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+            <input type="text" class="form-control input-lg text-center" placeholder="Icon Name" ng-model="formData.text">
+
+            <!-- createToDo() WILL CREATE NEW TODOS -->
+            <button type="submit" class="btn btn-primary btn-lg" ng-click="spawnShip()">ADD</button>
+        </form>
+    </body>
+</html>
