@@ -5,12 +5,17 @@ var socket = io();
 
 function mainController($scope, $http) {
     $scope.formData = {};
+    console.log("Controller is live");
     
     $scope.sync = function() {
+        console.log("Attempting Sync...");
         $http.get('api/ships').success(function(data) {
             $scope.ships = data;
             console.log('Load success:'+data);
-                    $( ".draggable" ).draggable()
+                    $( ".draggable" ).draggable({
+                        preventCollision: true,
+                        containment: "#map"
+                    })
         }).error(function(data) {
             console.log('Load error: ' + data);
         });
@@ -118,6 +123,10 @@ flitterMap.directive('myDraggable', ['$document', function($document) {
                 else{
                     scope.move(element.attr('mongoid'), element.offset());
                 }
+            }
+
+            function sendToTray(){
+
             }
         }
     };

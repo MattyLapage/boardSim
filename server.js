@@ -8,7 +8,13 @@ var methodOverride  = require('method-override');   // simulate DELETE and PUT (
 
 var io              = require('socket.io')(http);
 
-mongoose.connect('mongodb://mtylpg:mtylpg@ds031903.mongolab.com:31903/shiplog');     // connect to mongoDB database on modulus.io
+mongoose.connect('mongodb://mty1:mty1@ds031903.mongolab.com:31903/shiplog', 
+
+    function (error) {
+    if (error)
+        console.log(error);
+    console.log('Connection status:  '+mongoose.connection.readyState);
+    });
 
 app.use(express.static(__dirname + '/public'));                 // set the static files location /public/img will be /img for users
 app.use(morgan('dev'));                                         // log every request to the console
@@ -95,7 +101,7 @@ app.delete('/api/ships/:ship_id', function(req, res) {
 
 // application -------------------------------------------------------------
 app.get('*', function(req, res) {
-    res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
+    res.sendFile('/public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
 });
 
 io.on('connection', function(socket){

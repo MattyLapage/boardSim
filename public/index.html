@@ -75,20 +75,22 @@
     <body ng-controller="mainController">
         <div id="map">
             <div my-draggable mongoId="{{ship._id}}" ng-repeat="ship in ships" class="draggable" xPos="{{ship.xPos}}" style="top:{{ship.yPos}}px; left:{{ship.xPos}}px; position: absolute">
-                <img src="{{ship.icon}}"/>
+                <img src="icons/ion.png"/>
             </div>
         </div>
 
         <form id='controls'>
-            <div id="trashZone" style="background: #ccc; height: 20px; margin-bottom: 20px">
-                Trash Zone
-            </div>
 
             <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
             <input type="text" class="form-control input-lg text-center" placeholder="Icon Name" ng-model="formData.text">
 
             <!-- createToDo() WILL CREATE NEW TODOS -->
             <button type="submit" class="btn btn-primary btn-lg" ng-click="spawnShip()">ADD</button>
+            <div id="trashZone" style="background: #ccc; height: 100px; margin-top: 20px">
+                Trash Zone
+            </div>
         </form>
+
+
     </body>
 </html>
